@@ -1,0 +1,19 @@
+# Launch mongdb
+docker run \
+    --name mongo \
+    --rm \
+    -p 20017:20017 \
+    -e MONGO_INITDB_ROOT_USERNAME=admin \
+    -e MONGO_INITDB_ROOT_PASSWORD=admin \
+    mongo
+
+docker run \
+    --name mongo-express \
+    --rm \
+    -p 8081:8081 \
+    -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \
+    -e ME_CONFIG_MONGODB_ADMINPASSWORD=admin \
+    -e ME_CONFIG_MONGODB_SERVER=192.168.122.1 \
+    mongo-express
+
+
