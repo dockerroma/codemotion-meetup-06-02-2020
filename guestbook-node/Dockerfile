@@ -7,7 +7,7 @@ COPY package.json /app/package.json
 
 RUN npm install 
 
-EXPOSE 3000
+# EXPOSE 3005
 
 # RUN apt-get update \
 #     apt-get install -y nodejs nodejs-legacy npm
