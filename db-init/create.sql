@@ -1,0 +1,1 @@
+CREATE TABLE answers(id INT AUTO_INCREMENT, sentence VARCHAR(255), PRIMARY KEY(id));
