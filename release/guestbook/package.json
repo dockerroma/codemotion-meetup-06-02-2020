@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "mongodb": "^3.5.0",
     "mongoose": "^5.8.7",
-    "prom-client": "^11.5.3"
+    "prom-client": "^11.5.3",
+    "pug": "^2.0.4"
   }
 }

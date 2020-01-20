@@ -2,7 +2,9 @@ serverPort = 3005
 
 var express = require('express');
 var app = express();
+
 app.use(express.urlencoded())
+app.set('view engine', 'pug')
 
 // MONGO_URL = "mongodb://admin:admin@192.168.1.114:27017"
 MONGO_URL = "mongodb://admin:admin@mongo:27017"
@@ -22,51 +24,42 @@ const httpRequestDurationMicroseconds = new Prometheus.Histogram({
    buckets: [0.10, 5, 15, 50, 100, 200, 300, 400, 500, 1000, 2000]
 })
 
-/**
- * @param {*} response Method to be invoked with the rendered page
- */
-function renderMainPage(res) {
+app.get('/slow', function (req, res) {
 
-  Guest.find({}, function (err, guests) {
-
-    page = "<html><body>"
-
-    page += "<h1>Guestbook</h1>"
-
-    page += "<form method='POST'>"
-    page += "<input type='text' name='guest' />"
-    page += "<input type='submit' value='add guest'/>"
-    page += "</form>"
-
-    page += "<h3>Guests</h3>"
-
-    if (err) {
-      console.log(err);
-      page += "<br/>"
-      page += "<h2>Guests</h2>"
-    }
-    else {
-      page += "<ul>"
-      page += guests.map(x => "<li>" + x.name + "</li>").join("<br/>")
-      page += "</ul>"
-    }
-
-    res(page);
-
-  })
-
-}
-
-app.get('/', function (req, res) {
   // Begin of each response
   var hrstart = process.hrtime()
 
-  renderMainPage((page) => res.send(page))
+  setTimeout(() => {
 
-  // After each response
-  hrend = process.hrtime(hrstart)
-  responseTimeInMs = hrend[0] * 1000 + hrend[1] / 1000
-  httpRequestDurationMicroseconds.labels(req.route.path).observe(responseTimeInMs)
+    Guest.find({}, function (err, guests) {
+      guests = guests.map(x => x.name)
+      res.render('index', { list: guests })
+  
+      // After each response
+      hrend = process.hrtime(hrstart)
+      responseTimeInMs = hrend[0] * 1000 + hrend[1] / 1000000
+      httpRequestDurationMicroseconds.labels(req.route.path).observe(responseTimeInMs)
+  
+    })
+    
+  }, 600)
+})
+
+app.get('/', function (req, res) {
+
+  // Begin of each response
+  var hrstart = process.hrtime()
+
+  Guest.find({}, function (err, guests) {
+    guests = guests.map(x => x.name)
+    res.render('index', { list: guests })
+
+    // After each response
+    hrend = process.hrtime(hrstart)
+    responseTimeInMs = hrend[0] * 1000 + hrend[1] / 1000000
+    httpRequestDurationMicroseconds.labels(req.route.path).observe(responseTimeInMs)
+
+  })
 });
 
 // Metrics endpoint
@@ -85,29 +78,33 @@ app.post('/', function (req, res) {
 
   // Save it
   guest.save().then(() => {
-    console.log("saved")
+    console.log("saved:", req.body.guest)
 
-    // Render main page
-    renderMainPage((page) => res.send(page))
+    Guest.find({}, function (err, guests) {
+      guests = guests.map(x => x.name)
+      res.render('index', { list: guests })
 
-    // After each response
-    hrend = process.hrtime(hrstart)
-    responseTimeInMs = hrend[0] * 1000 + hrend[1] / 1000
-    httpRequestDurationMicroseconds.labels(req.route.path).observe(responseTimeInMs)
+      // After each response
+      hrend = process.hrtime(hrstart)
+      responseTimeInMs = hrend[0] * 1000 + hrend[1] / 1000000
+      httpRequestDurationMicroseconds.labels(req.route.path).observe(responseTimeInMs)
+
+    })
 
   }).catch((err) => {
-    console.log("Error")
+    console.log("Error on:", req.body.guest)
 
-    // Render main page
-    renderMainPage((page) => res.send(page))
+    Guest.find({}, function (err, guests) {
+      guests = guests.map(x => x.name)
+      res.render('index', { list: guests })
 
-    // After each response
-    hrend = process.hrtime(hrstart)
-    responseTimeInMs = hrend[0] * 1000 + hrend[1] / 1000
-    httpRequestDurationMicroseconds.labels(req.route.path).observe(responseTimeInMs)
+      // After each response
+      hrend = process.hrtime(hrstart)
+      responseTimeInMs = hrend[0] * 1000 + hrend[1] / 1000000
+      httpRequestDurationMicroseconds.labels(req.route.path).observe(responseTimeInMs)
 
+    })
   })
-  
 })
 
 app.listen(serverPort, function () {
