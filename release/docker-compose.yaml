@@ -3,7 +3,6 @@ version: '3.1'
 services:
 
   guestbook:
-    # image: guestbook
     restart: always
     ports:
       - 3005:3005

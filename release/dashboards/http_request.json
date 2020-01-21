@@ -1,61 +1,238 @@
 {
-  "datasource": "prom1",
-  "cards": {
-    "cardPadding": null,
-    "cardRound": null
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
   },
-  "color": {
-    "cardColor": "#b4ff00",
-    "colorScale": "sqrt",
-    "colorScheme": "interpolateOranges",
-    "exponent": 0.5,
-    "mode": "spectrum"
-  },
-  "dataFormat": "timeseries",
-  "gridPos": {
-    "h": 9,
-    "w": 12,
-    "x": 0,
-    "y": 0
-  },
-  "heatmap": {},
-  "hideZeroBuckets": false,
-  "highlightCards": true,
-  "id": 2,
-  "legend": {
-    "show": false
-  },
-  "options": {},
-  "reverseYBuckets": false,
-  "targets": [
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
     {
-      "expr": "http_request_duration_ms_bucket  ",
-      "refId": "A"
+      "cacheTimeout": null,
+      "datasource": "prom1",
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "links": [],
+      "options": {
+        "displayMode": "lcd",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "horizontal"
+      },
+      "pluginVersion": "6.5.1",
+      "targets": [
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='0.10'}",
+          "instant": false,
+          "legendFormat": "<{{le}}",
+          "refId": "A"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='5'}",
+          "legendFormat": "<{{le}}",
+          "refId": "B"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='15'}",
+          "legendFormat": "<{{le}}",
+          "refId": "C"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='50'}",
+          "legendFormat": "<{{le}}",
+          "refId": "D"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='100'}",
+          "legendFormat": "<{{le}}",
+          "refId": "E"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='200'}",
+          "legendFormat": " <{{le}}",
+          "refId": "F"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='300'}",
+          "legendFormat": "<{{le}}",
+          "refId": "G"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='400'}",
+          "legendFormat": "<{{le}}",
+          "refId": "H"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='500'}",
+          "legendFormat": "<{{le}}",
+          "refId": "I"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='1000'}",
+          "legendFormat": "<{{le}}",
+          "refId": "J"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/',le='2000'}",
+          "legendFormat": "<{{le}}",
+          "refId": "K"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "URL: /",
+      "type": "bargauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "prom1",
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 3,
+      "links": [],
+      "options": {
+        "displayMode": "lcd",
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "horizontal"
+      },
+      "pluginVersion": "6.5.1",
+      "targets": [
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='0.10'}",
+          "instant": false,
+          "legendFormat": "<{{le}}",
+          "refId": "A"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='5'}",
+          "legendFormat": "<{{le}}",
+          "refId": "B"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='15'}",
+          "legendFormat": "<{{le}}",
+          "refId": "C"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='50'}",
+          "legendFormat": "<{{le}}",
+          "refId": "D"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='100'}",
+          "legendFormat": "<{{le}}",
+          "refId": "E"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='200'}",
+          "legendFormat": " <{{le}}",
+          "refId": "F"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='300'}",
+          "legendFormat": "<{{le}}",
+          "refId": "G"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='400'}",
+          "legendFormat": "<{{le}}",
+          "refId": "H"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='500'}",
+          "legendFormat": "<{{le}}",
+          "refId": "I"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='1000'}",
+          "legendFormat": "<{{le}}",
+          "refId": "J"
+        },
+        {
+          "expr": "http_request_duration_ms_bucket{route='/slow',le='2000'}",
+          "legendFormat": "<{{le}}",
+          "refId": "K"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "URL: /slow",
+      "type": "bargauge"
     }
   ],
-  "timeFrom": null,
-  "timeShift": null,
-  "title": "Panel Title",
-  "tooltip": {
-    "show": true,
-    "showHistogram": false
+  "schemaVersion": 21,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
   },
-  "type": "heatmap",
-  "xAxis": {
-    "show": true
+  "time": {
+    "from": "now-6h",
+    "to": "now"
   },
-  "xBucketNumber": null,
-  "xBucketSize": null,
-  "yAxis": {
-    "decimals": null,
-    "format": "short",
-    "logBase": 1,
-    "max": null,
-    "min": null,
-    "show": true,
-    "splitFactor": null
-  },
-  "yBucketBound": "auto",
-  "yBucketNumber": null,
-  "yBucketSize": null
+  "timepicker": {},
+  "timezone": "",
+  "title": "URL: /",
+  "uid": "Gtt_N7yZk",
+  "version": 3
 }
