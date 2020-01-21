@@ -47,3 +47,16 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: admin
 
+  init-db:
+   # image: db-init
+    environment:
+      DB_HOST: mongo 
+      DB_PORT: 27001
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      DB_DATABASE: test
+      DB_COLLECTION: guest
+    build:
+      context: ./db-init
+      dockerfile: Dockerfile
+
