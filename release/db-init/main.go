@@ -7,7 +7,7 @@ import (
     "os"
     "time"
     "bufio"
-//  "go.mongodb.org/mongo-driver/bson"
+    "go.mongodb.org/mongo-driver/bson"
     "go.mongodb.org/mongo-driver/mongo"
     "go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -72,9 +72,12 @@ func main() {
         err = client.Connect(ctx)
 
 	collection := client.Database(database).Collection(collection)
-
-	
-	insertRows(collection,err, insertDataStatementsFilePath);	
+ 	count, err := collection.CountDocuments(context.Background(), bson.D{})
+	if count == 0 {	
+	  insertRows(collection,err, insertDataStatementsFilePath);
+	} else {
+		log.Print("Database does NOT need initialization.")	
+	}	
 	log.Print("Database initialization completed.")
 
 
