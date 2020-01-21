@@ -13,14 +13,14 @@ import (
 )
 
 type Guest struct {
-    name string
+    Name string
     
 }
 
 var (
         connectionUrl = "mongodb://"+os.Getenv("DB_USERNAME")+":"+os.Getenv("DB_PASSWORD")+"@"+os.Getenv("DB_HOST")+":"+os.Getenv("DB_PORT")
-	database = "test"
-	collection = "guest"
+	database = os.Getenv("DB_DATABASE")
+	collection = os.Getenv("DB_COLLECTION")
 	insertDataStatementsFilePath ="insert.sql";
 )
 
@@ -54,7 +54,7 @@ func insertRows(collection *mongo.Collection,err error,filepath string){
     scanner := bufio.NewScanner(file)
     for scanner.Scan() {
         fmt.Println(scanner.Text())
-	oneguest := Guest{name: scanner.Text()}
+	oneguest := Guest{Name: scanner.Text()}
         insertResult, err := collection.InsertOne(context.TODO(), oneguest)
 	if err != nil {
     		log.Fatal(err)
@@ -71,7 +71,7 @@ func main() {
         ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
         err = client.Connect(ctx)
 
-	collection := client.Database(os.Getenv("DB_DATABASE")).Collection(os.Getenv("DB_COLLECTION"))
+	collection := client.Database(database).Collection(collection)
 
 	
 	insertRows(collection,err, insertDataStatementsFilePath);	

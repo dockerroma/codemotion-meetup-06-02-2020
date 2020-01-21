@@ -9,6 +9,8 @@ services:
     build:
       context: ./guestbook
       dockerfile: Dockerfile
+    depends_on:
+      - "mongo"
 
   prometheus:
     image: prom/prometheus
@@ -17,6 +19,8 @@ services:
     - ./prometheus.yaml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
+    depends_on:
+      - "guestbook"
 
   grafana:
     image: grafana/grafana
@@ -27,6 +31,8 @@ services:
     - ./provisioning:/etc/grafana/provisioning
     ports:
       - 3000:3000
+    depends_on:
+      - "prometheus"
 
   mongo:
     image: mongo
@@ -45,17 +51,23 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+    depends_on:
+      - "mongo"
 
   init-db:
    # image: db-init
     environment:
-      DB_HOST: mongo 
-      DB_PORT: 27001
+      DB_HOST: mongo
+      DB_PORT: 27017
       DB_USERNAME: admin
       DB_PASSWORD: admin
       DB_DATABASE: test
-      DB_COLLECTION: guest
+      DB_COLLECTION: guests
+    volumes:
+      - ./db-init/insert.sql:/go/src/db-init/insert.sql
     build:
       context: ./db-init
       dockerfile: Dockerfile
+    depends_on:
+      - "mongo"
 
