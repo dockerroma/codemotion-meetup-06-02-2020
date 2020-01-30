@@ -55,7 +55,7 @@ services:
       - "mongo"
 
   init-db:
-   # image: db-init
+#    image: captainmatt/db-init-go:0.0.1
     environment:
       DB_HOST: mongo
       DB_PORT: 27017

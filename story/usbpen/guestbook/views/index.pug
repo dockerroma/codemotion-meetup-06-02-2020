@@ -1,0 +1,14 @@
+html
+  head
+    title= Guestbook
+  body
+    h1 Guestbook
+    form(action="/", method="post")
+      input(type="text", name="guest")
+      input(type="submit", value="Add Guest")
+    br
+    h1 Guests
+    ul
+      each val in list
+        li= val
+        br
