@@ -2,7 +2,7 @@
 docker run \
     --name mongo \
     --rm \
-    -p 20017:20017 \
+    -p 27017:27017 \
     -e MONGO_INITDB_ROOT_USERNAME=admin \
     -e MONGO_INITDB_ROOT_PASSWORD=admin \
     mongo    
@@ -154,3 +154,23 @@ app.get('/metrics', (req, res) => {
 // * provisioning
 // * dashboards
 //--------------------------------------
+/*
+  init-db:
+    environment:
+      DB_HOST: mongo
+      DB_PORT: 27017
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      DB_DATABASE: test
+      DB_COLLECTION: guests
+    volumes:
+      - ./init-db/insert.sql:/go/src/db-init/insert.sql
+    image: captainmatt/db-init-go:0.0.2
+    depends_on:
+      - "mongo"
+*/
+//--------------------------------------
+// CREARE IL FILE
+// * init-db/insert.sql
+// Con una lista di nomi
+//

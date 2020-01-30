@@ -24,7 +24,7 @@ const httpRequestDurationMicroseconds = new Prometheus.Histogram({
    buckets: [0.10, 5, 15, 50, 100, 200, 300, 400, 500, 1000, 2000]
 })
 
-app.get('/slow', function (req, res) {
+app.get('/old', function (req, res) {
 
   // Begin of each response
   var hrstart = process.hrtime()

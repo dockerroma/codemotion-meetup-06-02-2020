@@ -46,7 +46,7 @@ app.post('/', function (req, res) {
   })
 })
 
-app.get('/slow', function (req, res) {
+app.get('/old', function (req, res) {
 
   setTimeout(() => {
 

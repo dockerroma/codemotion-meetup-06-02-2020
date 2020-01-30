@@ -158,65 +158,65 @@
       "pluginVersion": "6.5.1",
       "targets": [
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='0.10'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='0.10'}",
           "instant": false,
           "legendFormat": "<{{le}}",
           "refId": "A"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='5'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='5'}",
           "legendFormat": "<{{le}}",
           "refId": "B"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='15'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='15'}",
           "legendFormat": "<{{le}}",
           "refId": "C"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='50'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='50'}",
           "legendFormat": "<{{le}}",
           "refId": "D"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='100'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='100'}",
           "legendFormat": "<{{le}}",
           "refId": "E"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='200'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='200'}",
           "legendFormat": " <{{le}}",
           "refId": "F"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='300'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='300'}",
           "legendFormat": "<{{le}}",
           "refId": "G"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='400'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='400'}",
           "legendFormat": "<{{le}}",
           "refId": "H"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='500'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='500'}",
           "legendFormat": "<{{le}}",
           "refId": "I"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='1000'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='1000'}",
           "legendFormat": "<{{le}}",
           "refId": "J"
         },
         {
-          "expr": "http_request_duration_ms_bucket{route='/slow',le='2000'}",
+          "expr": "http_request_duration_ms_bucket{route='/old',le='2000'}",
           "legendFormat": "<{{le}}",
           "refId": "K"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "URL: /slow",
+      "title": "URL: /old",
       "type": "bargauge"
     }
   ],
