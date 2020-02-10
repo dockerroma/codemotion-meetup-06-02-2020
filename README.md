@@ -2,4 +2,4 @@
 
 * `release` directory contains the final project
 * `story` contains the snippets code to use during presentation
-
+* `slides` contains the slides of the two talks
